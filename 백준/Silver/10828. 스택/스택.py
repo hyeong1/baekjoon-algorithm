@@ -6,12 +6,11 @@ n = int(input())
 for i in range(n):
     input_str = sys.stdin.readline().split()
     if input_str[0] == "push":
-        stack.append(int(input_str[1]))
+        stack.append(input_str[1])
         sp += 1
     if input_str[0] == "pop":
         if sp > -1:
-            print(stack[sp])
-            stack.pop()
+            print(stack.pop())
             sp -= 1
         else:
             print(sp)
