@@ -1,9 +1,9 @@
-import heapq
+import heapq, sys
 
 N = int(input())
 heap = []
 for _ in range(N):
-    heap.append(int(input()))
+    heap.append(int(sys.stdin.readline()))
 
 heapq.heapify(heap)
 result = 0
