@@ -9,23 +9,22 @@ while True:
         break
 
 
-def solve(arr):
-    if len(arr) == 0:
+def solve(start, end):
+    if start > end:
         return
 
-    mid = arr[0]
-    temp_l, temp_r = [], []
-    for i in range(1, len(arr)):
-        if mid < arr[i]:
-            temp_l = arr[1:i]
-            temp_r = arr[i:]
+    parent = nums[start]
+    div_idx = end+1 # 만약 왼쪽 / 오른쪽 안잘리면, end 다음 번호가 div_idx이어야함
+    for i in range(start+1,end+1):
+        if parent < nums[i]:
+            div_idx = i
             break
-    else:  # 모두 mid 보다 작은 경우 (모두 왼쪽 서브 트리)
-        temp_l = arr[1:]
+            
 
-    solve(temp_l)
-    solve(temp_r)
-    print(mid)
+    # 다음으로 넘어가기
+    solve(start+1,div_idx-1)
+    solve(div_idx,end)
 
-
-solve(nums)
+    print(nums[start])
+    
+solve(0,len(nums)-1)
