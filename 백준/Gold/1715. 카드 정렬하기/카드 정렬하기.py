@@ -3,16 +3,14 @@ import heapq
 N = int(input())
 heap = []
 for _ in range(N):
-    heapq.heappush(heap, int(input()))
+    heap.append(int(input()))
 
+heapq.heapify(heap)
 result = 0
-while True:
+while len(heap) > 1:
     a = heapq.heappop(heap)
-    if not heap:
-        break
     b = heapq.heappop(heap)
-    tmp = a + b
-    result += tmp
-    heapq.heappush(heap, tmp)
+    result += a + b
+    heapq.heappush(heap, a + b)
 
 print(result)
