@@ -6,13 +6,13 @@ for _ in range(N):
     heapq.heappush(heap, int(input()))
 
 result = 0
-while heap:
+while True:
     a = heapq.heappop(heap)
     if not heap:
         break
     b = heapq.heappop(heap)
     tmp = a + b
     result += tmp
-    heap.append(tmp)
+    heapq.heappush(heap, tmp)
 
 print(result)
