@@ -30,7 +30,7 @@ for _ in range(N-1):
 
 path = 0
 for i in range(N):
-    if is_inside[i] == 1 and visited[i] == 0:
+    if is_inside[i] == 0 and visited[i] == 0:
         x = dfs(i, 0)
         path += x * (x-1)
 
