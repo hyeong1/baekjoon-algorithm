@@ -2,40 +2,40 @@ import sys
 sys.setrecursionlimit(10**9)
 
 
-# 메모리 초과, 시간 초과
-def dfs(r, c):  # 0 이 아닌 칸 dfs 탐색
+def dfs(r, c):
     visited[r][c] = True
     for d in range(4):
-        if not visited[r + dr[d]][c + dc[d]] and (r + dr[d], c + dc[d]) in only_ice:
+        if not visited[r + dr[d]][c + dc[d]] and (r + dr[d], c + dc[d]) in ice:
             dfs(r + dr[d], c + dc[d])
 
 
-N, M = map(int, input().split())
-ice_map = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-only_ice = set((i, j) for i in range(N) for j in range(M) if ice_map[i][j] != 0)
-dr, dc = [-1, 0, 1, 0], [0, 1, 0, -1]  # 북 동 남 서 (위에서 부터 시계 방향)
+R, C = map(int, input().split())
+graph = [list(map(int, sys.stdin.readline().split())) for _ in range(R)]
 year = 0
+ice = set((i, j) for i in range(R) for j in range(C) if graph[i][j] > 0)
+dr, dc = [-1, 0, 1, 0], [0, 1, 0, -1]
 
+# 1년 동안 하는 일 (BFS로 빙산 녹이기)
 while True:
-    visited = [[False] * M for _ in range(N)]
-    area = 0
-    for x, y in only_ice:
-        if not visited[x][y]:
-            dfs(x, y)
-            area += 1
-    if area == 0:
-        print(0)
-        break
-    elif area > 1:
+    # 연결 유무를 칸이 0이 아닌 걸로 체크
+    visited = [[False] * C for _ in range(R)]
+    count = 0
+    for a, b in ice:
+        if not visited[a][b] and graph[a][b] != 0:
+            dfs(a, b)
+            count += 1
+    if count > 1:
         print(year)
         break
+    elif count == 0:
+        print(0)
+        break
     else:
-        # 1년 동안 하는 일
-        only_ice_copy = set(only_ice)
-        for x, y in only_ice:
-            down_val = sum(1 for d in range(4) if (x + dr[d], y + dc[d]) not in only_ice)
-            ice_map[x][y] = max(ice_map[x][y] - down_val, 0)
-            if ice_map[x][y] == 0:
-                only_ice_copy.remove((x, y))
-        only_ice = only_ice_copy
+        copy_ice = set(ice)
+        for cur_r, cur_c in ice:
+            cnt = sum(1 for d in range(4) if (cur_r + dr[d], cur_c + dc[d]) not in ice)
+            graph[cur_r][cur_c] = max(graph[cur_r][cur_c] - cnt, 0)
+            if graph[cur_r][cur_c] == 0:
+                copy_ice.remove((cur_r, cur_c))
+        ice = copy_ice
         year += 1
