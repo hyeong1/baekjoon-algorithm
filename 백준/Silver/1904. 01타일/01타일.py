@@ -1,4 +1,13 @@
+import sys
+
 N = int(input())
+if N == 1:
+    print(1)
+    sys.exit()
+elif N == 2:
+    print(2)
+    sys.exit()
+    
 two_before = 1
 one_before = 2
 
@@ -8,9 +17,4 @@ for _ in range(3, N+1):
     two_before = one_before
     one_before = answer
 
-if N == 1:
-    print(1)
-elif N == 2:
-    print(2)
-else:
-    print(answer)
+print(answer)
