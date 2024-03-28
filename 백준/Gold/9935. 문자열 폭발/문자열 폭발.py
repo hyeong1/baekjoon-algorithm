@@ -1,10 +1,10 @@
 string = input()
-bomb = input()
+bomb = list(input().strip())
 
 stack = []
 for s in string:
     stack.append(s)
-    if ''.join(stack[-len(bomb):]) == bomb:
+    if stack[-len(bomb):] == bomb:
         for i in range(len(bomb)):
             stack.pop()
 
