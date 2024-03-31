@@ -11,10 +11,10 @@ for i in range(len(string)):
         check = string[i:i + len(word)]
         if check != word:
             continue
-        if dp[i] is True:
+        if dp[i]:
             dp[i + len(word)] = True 
 
-if dp[-1] is True:
+if dp[-1]:
     print(1)
 else:
     print(0)
