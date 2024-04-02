@@ -1,5 +1,5 @@
 N = int(input())
-dp = [0] * (N+1)
+dp = [0] * (1001)
 
 for i in range(1, N+1):
     dp[i] = i % 2
