@@ -4,7 +4,7 @@ N = int(sys.stdin.readline())
 colors = list(map(str, sys.stdin.readline()))
 colors = colors[:len(colors)-1]
 
-ans, b_cnt, r_cnt = 0, 0, 0
+b_cnt, r_cnt = 0, 0
 for c in colors:
     if c == 'B':
         b_cnt += 1
