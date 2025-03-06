@@ -1,10 +1,11 @@
-N = int(input())
-dp = [0] * (1001)
+n = int(input())
+dp = [0 for _ in range(n)]
 
-for i in range(1, N+1):
-    dp[i] = i % 2
+dp[0] = 1
+for i in range(2, n):
+    dp[i] = dp[i - 2]
 
-if dp[N] == 1:
-    print("SK")
+if dp[-1] == 1:
+    print('SK')
 else:
-    print("CY")
+    print('CY')
